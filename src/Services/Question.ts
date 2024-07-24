@@ -2,18 +2,12 @@ import Question, { IQuestion, IOptions } from "../models/Question";
 import { Request, Response } from "express";
 import IQuestionResult from "../models/QuestionResult";
 import IFormResult from "../models/FormResult";
+import { create, createInBulk, getAll } from "../repositories/QuestionRepository";
+import { getAll as getAllQuestionResult } from "../repositories/QuestionResultRepository";
 
 export const createQuestionInBulk = async (questionList: IQuestion[]) => {
   try {
-    for (const question of questionList) {
-      const newQuestion = new Question({
-        questionValue: question.questionValue,
-        question: question.question,
-        options: question.options,
-        correctOption: question.correctOption,
-      });
-      await newQuestion.save();
-    }
+    await createInBulk(questionList);
   } catch (error) {
     console.log(error);
   }
@@ -31,30 +25,18 @@ export const createQuestion = async (
     options,
     correctOption,
   });
-  await newQuestion.save();
+  await create(newQuestion);
 
   return newQuestion;
 };
 
 export const getQuestions = async (): Promise<IQuestion[]> => {
-  return await Question.find();
+  return await getAll();
 };
 
 export const getResults = async (questionResultList: IQuestionResult[]): Promise<IFormResult> => {
-  const questionList = await Question.find();
-  let correctAnswers = 0;
-  questionResultList.forEach((questionResult) => {
-    const currentQuestion = questionList.find(
-      (question) => question.questionValue === questionResult.questionValue
-    );
-    if (questionResult.option === currentQuestion?.correctOption)
-      correctAnswers = correctAnswers + 1;
-  });
-
-  const formResult: IFormResult = {
-      totalCorrectAnswers: correctAnswers,
-      totalAnswers: questionResultList.length,
-  }
+  const questionList = await getAll();
+  var formResult = await getAllQuestionResult(questionResultList, questionList);
 
   return formResult;
 };
