@@ -6,7 +6,7 @@
 4. Normalmente se crea una carpeta llamada src (source) - green
 5. Mejorar la seguridad del API (Investigar configuraciones avanzadas del CORS)
 6. Se recomienda tener una capa para las variables de entorno [config.ts] - green
-7. Profundizar patrones de diseño [Modelo-vista-controlador] [controller-service-respository]
+7. Profundizar patrones de diseño [Modelo-vista-controlador] [controller-service-respository] - green
 8. En la definición de las rutas, poner middlewares para validación de data | Librería [joi]
-9. Sacar la capa del respositorio
+9. Sacar la capa del respositorio - green
 10. Normalmente no se sube el archivo package-lock.json, ni los node_modules - green
