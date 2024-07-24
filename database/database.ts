@@ -1,10 +1,6 @@
 import mongoose from "mongoose";
 import { CONFIG } from "../config";
 
-const dotenv = require("dotenv");
-
-dotenv.config();
-
 export function runDatabase() {
   mongoose
     .connect(CONFIG.DATABASE_HOST)

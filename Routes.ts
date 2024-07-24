@@ -17,7 +17,8 @@ router.post("/questions", async (req: Request, res: Response) => {
     );
     res.status(201).json(newQuestion);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    const errorMessage = (error as Error).message;
+    res.status(500).json({ message: errorMessage });
   }
 });
 
@@ -26,7 +27,8 @@ router.get("/questions", async (req: Request, res: Response) => {
     const questions = await getQuestions();
     res.json(questions);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    const errorMessage = (error as Error).message;
+    res.status(500).json({ message: errorMessage });
   }
 });
 
@@ -44,7 +46,8 @@ router.post("/questions/result", async (req: Request, res: Response) => {
     //   res.status(400).json({ message: "incorrect request" });
     // }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    const errorMessage = (error as Error).message;
+    res.status(500).json({ message: errorMessage });
   }
 });
 

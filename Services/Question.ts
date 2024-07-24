@@ -47,7 +47,7 @@ export const getResults = async (questionResultList: IQuestionResult[]): Promise
     const currentQuestion = questionList.find(
       (question) => question.questionValue === questionResult.questionValue
     );
-    if (questionResult.option === currentQuestion.correctOption)
+    if (questionResult.option === currentQuestion?.correctOption)
       correctAnswers = correctAnswers + 1;
   });
 
