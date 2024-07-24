@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { CONFIG } from "../config";
+import { CONFIG } from "../../config";
 
 export function runDatabase() {
   mongoose
